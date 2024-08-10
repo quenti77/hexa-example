@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\GameOperations\:
+    resource: '%kernel.project_dir%/src/GameOperations'
+
+  App\GameOperations\Infrastructure\Controller\:
+    resource: '%kernel.project_dir%/src/GameOperations/Infrastructure/Controller'
+    tags: ['controller.service_arguments']
+
+doctrine:
+  orm:
+    entity_managers:
+      default:
+        mappings:
+          Shared:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/GameOperations/Infrastructure/Doctrine/Entities'
+            prefix: 'App\GameOperations\Infrastructure\Doctrine\Entities'

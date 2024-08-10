@@ -1,0 +1,16 @@
+imports:
+    - { resource: contexts/*.yaml }
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Kernel.php'
+            - '../src/Shared'
+            - '../src/GameOperations'

@@ -1,0 +1,31 @@
+framework:
+    messenger:
+        failure_transport: failed
+        serializer:
+            symfony_serializer:
+                format: json
+
+        default_bus: command.bus
+        buses:
+            command.bus: ~
+            query.bus: ~
+
+        transports:
+            sync: 'sync://'
+            command.bus: 'sync://'
+            query.bus: 'sync://'
+            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            failed: 'doctrine://default?queue_name=failed&auto_setup=false'
+
+        routing:
+            'App\Shared\Domain\Buses\CommandInterface': command.bus
+            'App\Shared\Domain\Buses\QueryInterface': query.bus
+            'App\Shared\Domain\Buses\AsyncInterface': async
+
+
+when@test:
+   framework:
+       messenger:
+           transports:
+               async: 'in-memory://'
+               sync: 'in-memory://'

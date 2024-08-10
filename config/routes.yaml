@@ -1,0 +1,7 @@
+Shared:
+  resource: '../src/Shared'
+  type: attribute
+
+GameOperations:
+  resource: '../src/GameOperations'
+  type: attribute
